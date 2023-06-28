@@ -1,12 +1,19 @@
-//import react into the bundle
 import React from "react";
 import ReactDOM from "react-dom";
-
-// include your styles into the webpack bundle
+import SecondsCounter from "./component/SecondsCounter";
 import "../styles/index.css";
 
-//import your own components
-import Home from "./component/home.jsx";
+let totalSeconds = 0;
 
-//render your react application
-ReactDOM.render(<Home />, document.querySelector("#app"));
+setInterval(() => {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  ReactDOM.render(
+    <SecondsCounter hours={hours} minutes={minutes} seconds={seconds} />,
+    document.querySelector("#app")
+  );
+
+  totalSeconds++;
+}, 1000);
